@@ -4,14 +4,19 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
-use App\Exceptions\UserExceptions;
 use App\Http\Requests\LoginRequest;
+use App\Services\UserService;
 use App\Utils\Response;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
+    public function __construct(private UserService $userService)
+    {
+    }
+
     /**
      * @throws AuthenticationException
      */
@@ -20,15 +25,8 @@ class LoginController extends Controller
         $email = $request->validated('email');
         $password = $request->validated('password');
 
-        // check if user with these credentials exists
-        $isCredentialsValid = Auth::attempt([
-            'email' => $email,
-            'password' => $password,
-        ], true);
+        $this->userService->login($email, $password);
 
-        if (!$isCredentialsValid) {
-            UserExceptions::unauthenticated(__('Invalid Credentials provided!'));
-        }
         $user = Auth::user();
 
         return Response::success(message: __('Welcome :firstName!', ['firstName' => $user->first_name]));
