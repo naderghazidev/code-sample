@@ -1,0 +1,33 @@
+services:
+    app:
+        build:
+            context: ./
+            dockerfile: Dockerfile
+        image: naderghazidev/code-sample
+        container_name: code-sample-app
+        volumes:
+            - '.:/var/www/app'
+        networks:
+            - code-sample
+        ports:
+            - '9876:80'
+    db:
+        image: 'mysql:8.0.29-oracle'
+        ports:
+            - '${MYSQL_FORWARD_DB_PORT:-3310}:3306'
+        container_name: code-sample-database
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        volumes:
+            - '.docker/mysql/data:/var/lib/mysql'
+            - '.docker/mysql/init:/docker-entrypoint-initdb.d'
+        networks:
+            - code-sample
+        healthcheck:
+            test: [ "CMD", "mysqladmin", "ping", "-p${DB_PASSWORD}" ]
+            retries: 3
+            timeout: 5s
+networks:
+    code-sample:
+        driver: bridge
+        name: code-sample
