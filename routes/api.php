@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\CalorieListController;
 use App\Http\Controllers\CalorieDeficitController;
+use App\Http\Controllers\FoodListController;
+use App\Http\Controllers\FoodSubmissionController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
@@ -21,5 +22,6 @@ Route::post('/register', RegisterController::class)->name('user.register');
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/calorie/deficit', CalorieDeficitController::class)->name('calorie.deficit');
-    Route::get('/calorie', CalorieListController::class)->name('calorie.list');
+    Route::post('/food/submit', FoodSubmissionController::class)->name('calorie.submit');
+    Route::get('/food', FoodListController::class)->name('calorie.list');
 });

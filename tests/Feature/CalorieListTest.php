@@ -3,7 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Database\Seeders\CaloriesSeeder;
+use Database\Seeders\FoodsSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -16,7 +16,7 @@ class CalorieListTest extends TestCase
         parent::setUp();
 
         $this->seed([
-            CaloriesSeeder::class
+            FoodsSeeder::class
         ]);
     }
 
