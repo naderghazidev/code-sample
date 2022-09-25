@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\ActivityLevel;
 use App\Enums\Gender;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
@@ -33,7 +34,13 @@ class RegisterRequest extends FormRequest
             'weight' => 'required|numeric',
             'height' => 'required|numeric',
             'age' => 'required|numeric',
-            'gender' => 'required|string|in:' . Gender::MALE->value . ',' . Gender::FEMALE->value
+            'gender' => 'required|string|in:' . Gender::MALE->value . ',' . Gender::FEMALE->value,
+            'activity_level' => 'required|string|in:'
+                . ActivityLevel::SEDENTARY->value . ','
+                . ActivityLevel::LIGHTLY_ACTIVE->value . ','
+                . ActivityLevel::MODERATELY_ACTIVE->value . ','
+                . ActivityLevel::VERY_ACTIVE->value . ','
+                . ActivityLevel::EXTREMELY_ACTIVE->value
         ];
     }
 }

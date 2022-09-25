@@ -24,7 +24,7 @@ class RegistrationTest extends TestCase
         $response = $this->postJson(route('user.register'), $attributes);
         //Assert
         $response->assertSuccessful();
-        $this->assertDatabaseHas('users', collect($attributes)->except(['password', 'password_confirmation'])->all());
+        $this->assertDatabaseHas('users', collect($attributes)->except(['password', 'password_confirmation','bmr','tdee'])->all());
     }
 
     /** @test

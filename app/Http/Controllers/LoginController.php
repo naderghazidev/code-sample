@@ -8,10 +8,13 @@ use App\Http\Requests\LoginRequest;
 use App\Services\UserService;
 use App\Utils\Response;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+
+    use RefreshDatabase;
 
     public function __construct(private UserService $userService)
     {
