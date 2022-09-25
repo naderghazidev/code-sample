@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CalorieDeficitRequest;
-use App\Services\CalorieDeficitCalculator;
+use App\Services\CalorieDeficitService;
 use App\Utils\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class CalorieDeficitController extends Controller
 {
 
-    public function __construct(private CalorieDeficitCalculator $calorieDeficitCalculator)
+    public function __construct(private CalorieDeficitService $calorieDeficitCalculator)
     {
     }
 

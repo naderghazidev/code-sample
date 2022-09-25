@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Enums\Gender;
 
-class BMRCalculator
+class BMRService
 {
 
     public function calculate(int $weight, int $height, int $age, Gender $gender): int

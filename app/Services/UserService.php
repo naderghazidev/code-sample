@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 class UserService
 {
 
-    public function __construct(private BMRCalculator $bmrCalculator, private TDEECalculator $tdeeCalculator)
+    public function __construct(private BMRService $bmrCalculator, private TDEEService $tdeeCalculator)
     {
     }
 

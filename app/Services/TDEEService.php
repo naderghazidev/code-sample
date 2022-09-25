@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Enums\ActivityLevel;
 
-class TDEECalculator
+class TDEEService
 {
 
     public function calculate(int $bmr, ActivityLevel $activityLevel): int

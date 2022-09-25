@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Enums\Gender;
-use App\Services\BMRCalculator;
+use App\Services\BMRService;
 use PHPUnit\Framework\TestCase;
 
 class BMRCalculatorTest extends TestCase
@@ -12,7 +12,7 @@ class BMRCalculatorTest extends TestCase
     public function can_calculate_bmr_for_males()
     {
         //Arrange
-        $bmiCalculator = new BMRCalculator();
+        $bmiCalculator = new BMRService();
         //Action
         $bmi = $bmiCalculator->calculate(90, 183, 28,Gender::MALE);
         //Assert
@@ -23,7 +23,7 @@ class BMRCalculatorTest extends TestCase
     public function can_calculate_bmr_for_females()
     {
         //Arrange
-        $bmiCalculator = new BMRCalculator();
+        $bmiCalculator = new BMRService();
         //Action
         $bmi = $bmiCalculator->calculate(90, 183, 28,Gender::FEMALE);
         //Assert

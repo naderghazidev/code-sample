@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class CalorieDeficitCalculator
+class CalorieDeficitService
 {
 
     public function calculate(int $tdee, int $days, int $weightLossAmount): int

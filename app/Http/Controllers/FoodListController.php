@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\CalorieService;
+use App\Services\FoodService;
 use App\Utils\Response;
 use Illuminate\Http\JsonResponse;
 
-class CalorieListController extends Controller
+class FoodListController extends Controller
 {
 
-    public function __construct(private CalorieService $calorieService)
+    public function __construct(private FoodService $calorieService)
     {
     }
 

@@ -3,7 +3,7 @@
 namespace Tests\Unit;
 
 use App\Enums\ActivityLevel;
-use App\Services\TDEECalculator;
+use App\Services\TDEEService;
 use PHPUnit\Framework\TestCase;
 
 class TDEECalculatorTest extends TestCase
@@ -14,7 +14,7 @@ class TDEECalculatorTest extends TestCase
     public function can_calculate_tdee($activityLevel, $expectedResult)
     {
         //Arrange
-        $tdeeCalculator = new TDEECalculator();
+        $tdeeCalculator = new TDEEService();
         //Action
         $tdee = $tdeeCalculator->calculate(1909, $activityLevel);
         //Assert
