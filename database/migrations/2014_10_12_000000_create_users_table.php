@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\ActivityLevel;
 use App\Enums\Gender;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -22,7 +23,16 @@ return new class extends Migration {
             $table->integer('weight');
             $table->integer('height');
             $table->integer('age');
+            $table->integer('bmr');
+            $table->integer('tdee');
             $table->enum('gender', [Gender::MALE->value, Gender::FEMALE->value]);
+            $table->enum('activity_level', [
+                ActivityLevel::SEDENTARY->value,
+                ActivityLevel::LIGHTLY_ACTIVE->value,
+                ActivityLevel::MODERATELY_ACTIVE->value,
+                ActivityLevel::VERY_ACTIVE->value,
+                ActivityLevel::EXTREMELY_ACTIVE->value,
+            ]);
             $table->rememberToken();
             $table->timestamps();
         });
