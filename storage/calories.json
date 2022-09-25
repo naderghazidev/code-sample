@@ -1,0 +1,26 @@
+[
+    {
+        "name": "potato",
+        "calorie": 300
+    },
+    {
+        "name": "tea",
+        "calorie": 50
+    },
+    {
+        "name": "coffee",
+        "calorie": 10
+    },
+    {
+        "name": "apple",
+        "calorie": 100
+    },
+    {
+        "name": "cucumber",
+        "calorie": 10
+    },
+    {
+        "name": "orange",
+        "calorie": 200
+    }
+]
