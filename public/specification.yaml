@@ -1,0 +1,346 @@
+openapi: 3.1.0
+x-stoplight:
+  id: fhdi6iyzg8x0s
+info:
+  title: specification
+  version: '1.0'
+servers:
+  - url: 'http://localhost:9876'
+paths:
+  /api/login:
+    post:
+      summary: Log User in
+      operationId: post-api-login
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  result:
+                    type: 'null'
+                  message:
+                    type: string
+                    default: Welcome Nader!
+              examples:
+                User logged in as Nader:
+                  value:
+                    success: true
+                    result: null
+                    message: Welcome Nader!
+        '422':
+          description: Unprocessable Entity (WebDAV)
+        '500':
+          $ref: '#/components/responses/internal-server-error'
+      tags:
+        - User
+      description: Login the user with provided credentials
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  format: email
+                password:
+                  type: string
+              required:
+                - email
+                - password
+        description: Login required credentials
+  /api/register:
+    post:
+      summary: Register a new user
+      operationId: post-api-register
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  result:
+                    type: 'null'
+                  message:
+                    type: string
+                    default: Registration Successful!
+              examples:
+                Registered successfully:
+                  value:
+                    success: true
+                    result: null
+                    message: Registration Successful!
+        '422':
+          description: Unprocessable Entity (WebDAV)
+        '500':
+          $ref: '#/components/responses/internal-server-error'
+      tags:
+        - User
+      description: Register a new user with valid inputs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: User first name
+                last_name:
+                  type: string
+                  description: User last name
+                email:
+                  type: string
+                  description: User email
+                  format: email
+                password:
+                  type: string
+                  description: User password
+                  format: password
+                password_confirmation:
+                  type: string
+                  description: User password confirmed
+                  format: password
+                weight:
+                  type: integer
+                  description: User weight in kg
+                height:
+                  type: integer
+                  description: User height in cm
+                age:
+                  type: integer
+                  description: User age
+                gender:
+                  type: string
+                  description: User gender
+                  enum:
+                    - male
+                    - female
+                activity_level:
+                  type: string
+                  description: User activity amount
+                  enum:
+                    - sedentary
+                    - lightly_active
+                    - moderately_active
+                    - very_active
+                    - extremely_active
+              required:
+                - first_name
+                - last_name
+                - email
+                - password
+                - password_confirmation
+                - weight
+                - height
+                - age
+                - gender
+                - activity_level
+            examples: {}
+        description: Registeration required credentials
+    parameters: []
+  /calorie/deficit:
+    post:
+      summary: Calculate Calorie Deficit
+      operationId: post-calorie-deficit
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  result:
+                    type: number
+                  message:
+                    type: 'null'
+              examples:
+                successful response:
+                  value:
+                    success: true
+                    result: 2230
+                    message: null
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+        '500':
+          $ref: '#/components/responses/internal-server-error'
+      description: Calculate daily required calorie to achieve a certain weight in a certain period
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                weight_loss_amount:
+                  type: integer
+                days:
+                  type: integer
+              required:
+                - weight_loss_amount
+                - days
+        description: Calorie deficit calculation required inputs
+      tags:
+        - Calorie
+  /food/submit:
+    post:
+      summary: Submit used food
+      operationId: post-used-food
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  result:
+                    type: string
+                    default: Foods added to your records successfully!
+                  message:
+                    type: 'null'
+              examples:
+                successful submission:
+                  value:
+                    success: true
+                    result: Foods added to your records successfully!
+                    message: null
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '422':
+          description: Unprocessable Entity (WebDAV)
+        '500':
+          $ref: '#/components/responses/internal-server-error'
+      description: submit used food(s) for current day
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                foods:
+                  type: array
+                  description: id of foods that user used
+                  items:
+                    type: number
+              required:
+                - foods
+        description: food submission required fields
+      tags:
+        - Food
+    parameters: []
+  /food:
+    get:
+      summary: Get list of foods
+      tags:
+        - Food
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    default: true
+                  result:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: number
+                        name:
+                          type: string
+                        calorie:
+                          type: number
+                  message:
+                    type: 'null'
+              examples:
+                successful list of foods:
+                  value:
+                    success: true
+                    result:
+                      - id: 1
+                        name: apple
+                        calorie: 200
+                      - id: 2
+                        name: orange
+                        calorie: 300
+                    message: null
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '500':
+          $ref: '#/components/responses/internal-server-error'
+      operationId: get-food
+      description: Get list of available foods
+components:
+  schemas: {}
+  responses:
+    internal-server-error:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: false
+              result:
+                type: 'null'
+              message:
+                type: string
+                default: Internal Server Error!
+            required:
+              - success
+              - result
+              - message
+          examples:
+            internal server error:
+              value:
+                success: false
+                result: null
+                message: Internal Server Error!
+    unauthorized:
+      description: Example response
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+                default: false
+              result:
+                type: 'null'
+              message:
+                type: string
+                default: Authentication Required!
+          examples:
+            unauthenticated:
+              value:
+                success: false
+                result: null
+                message: Authentication Required!
