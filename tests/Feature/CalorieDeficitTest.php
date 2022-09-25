@@ -29,9 +29,7 @@ class CalorieDeficitTest extends TestCase
     public function calculating_calorie_deficit_requires_authentication()
     {
         //Arrange
-        $user = User::factory()->create([
-            'tdee' => 2291
-        ]);
+
         //Action
         $response = $this->postJson(route('calorie.deficit'), [
             'days' => 98,
