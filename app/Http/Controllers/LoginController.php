@@ -25,13 +25,12 @@ class LoginController extends Controller
      */
     public function __invoke(LoginRequest $request)
     {
-        $email = $request->validated('email');
-        $password = $request->validated('password');
 
-        $this->userService->login($email, $password);
+        $this->userService->login(
+            $request->validated('email'),
+            $request->validated('password')
+        );
 
-        $user = Auth::user();
-
-        return Response::success(message: __('Welcome :firstName!', ['firstName' => $user->first_name]));
+        return Response::success(message: __('Welcome :firstName!', ['firstName' => Auth::user()->first_name]));
     }
 }
