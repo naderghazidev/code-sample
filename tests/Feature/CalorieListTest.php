@@ -27,7 +27,7 @@ class CalorieListTest extends TestCase
         $user = User::factory()->create();
         $this->actingAs($user);
         //Action
-        $response = $this->getJson(route('calorie.index'));
+        $response = $this->getJson(route('calorie.list'));
         //Assert
         $response->assertSuccessful();
         $response->assertJsonStructure([
@@ -49,7 +49,7 @@ class CalorieListTest extends TestCase
         //Arrange
 
         //Action
-        $response = $this->getJson(route('calorie.index'));
+        $response = $this->getJson(route('calorie.list'));
         //Assert
         $response->assertUnauthorized();
     }
